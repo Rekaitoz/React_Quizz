@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { useState } from "react";
 
 const AddQuestion = (props) => {
@@ -10,15 +11,32 @@ const AddQuestion = (props) => {
     jawaban: "",
   });
 
-  const handleSubmit = () => {
-    props.addNewQuestion(
-      state.question,
-      state.jaw1,
-      state.jaw2,
-      state.jaw3,
-      state.jaw4,
-      state.jawaban
-    );
+  const handleSubmit = (e) => {
+    if (
+      state.question == "" ||
+      state.jaw1 == "" ||
+      state.jaw2 == "" ||
+      state.jaw3 == "" ||
+      state.jaw4 == "" ||
+      state.jawaban == ""
+    ) {
+      e.preventDefault();
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please Fill Out the field and Choose the Answer!",
+      });
+    } else {
+      props.addNewQuestion(
+        state.question,
+        state.jaw1,
+        state.jaw2,
+        state.jaw3,
+        state.jaw4,
+        state.jawaban
+      );
+      props.handleClose();
+    }
   };
 
   const onChange = (e) => {
@@ -35,7 +53,7 @@ const AddQuestion = (props) => {
           x
         </span>
         <h1>Add New Question</h1>
-        <div onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <p>Question</p>
           <div class="input-group mb-3">
             <input
@@ -112,22 +130,21 @@ const AddQuestion = (props) => {
             aria-label="Default select example"
             onChange={onChange}
             name="jawaban"
+            required
           >
-            <option value="1" selected>
-              First Choice
+            <option selected hidden disabled>
+              The Answer
             </option>
+            <option value="1">First Choice</option>
             <option value="2">Second Choice</option>
             <option value="3">Third Choice</option>
             <option value="4">Fourth Choice</option>
           </select>
 
-          <button
-            onClick={handleSubmit}
-            className="btn btn-outline-primary mt-3"
-          >
+          <button type="submit" className="btn btn-outline-primary mt-3">
             Add Question
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

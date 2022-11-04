@@ -7,6 +7,7 @@ import AddQuiz from "./component/AddQuiz";
 import NotFound from "../notfound/NotFound";
 import Navbar from "../nav/Navbar";
 import Loadingsvg from "../loading/Loadingsvg";
+import NotUser from "../notuser/NotUser";
 
 const CreateQuiz = () => {
   const tokenId = useSelector((state) => state.token.id);
@@ -16,9 +17,11 @@ const CreateQuiz = () => {
     variables: { id: tokenId },
   });
   const [insertQuiz] = useMutation(INSERT_QUIZ);
+
   if (accounts != "User") {
-    return <NotFound></NotFound>;
+    return <NotUser></NotUser>;
   }
+
   if (error) {
     console.log(error);
   }
@@ -41,7 +44,7 @@ const CreateQuiz = () => {
     setIsOpen(!isOpen);
   };
   const check = () => {
-    if (!data?.user[0].quizzes) {
+    if (!data?.user[0].quizzes[0]) {
       return (
         <p style={{ color: "black", marginTop: "10px", fontSize: "20px" }}>
           <center> No Quiz ever made!</center>

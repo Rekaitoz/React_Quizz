@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import {
   GET_QUESTION_BY_ID,
@@ -30,31 +31,49 @@ const UpdateQuestion = (props) => {
         jawaban: data?.question[0].jawaban,
       });
     }
-    if (data) {
-      cek();
-    }
+
+    cek();
   }, [data]);
 
-  const handleSubmit = () => {
-    updateQuestion({
-      variables: {
-        id: props.id,
-        pertanyaan: state.question,
-        jawab_1: state.jaw1,
-        jawab_2: state.jaw2,
-        jawab_3: state.jaw3,
-        jawab_4: state.jaw4,
-        jawaban: state.jawaban,
-      },
-    });
-    props.handleClose();
+  const handleSubmit = (e) => {
+    if (
+      state.question == "" ||
+      state.jaw1 == "" ||
+      state.jaw2 == "" ||
+      state.jaw3 == "" ||
+      state.jaw4 == "" ||
+      state.jawaban == ""
+    ) {
+      e.preventDefault();
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please Fill Out the field and Choose the Answer!",
+      });
+    } else {
+      updateQuestion({
+        variables: {
+          id: props.id,
+          pertanyaan: state.question,
+          jawab_1: state.jaw1,
+          jawab_2: state.jaw2,
+          jawab_3: state.jaw3,
+          jawab_4: state.jaw4,
+          jawaban: state.jawaban,
+        },
+      });
+      props.handleClose();
+    }
   };
 
   const onChange = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
+    console.log(state.jawaban, "jawaban");
   };
 
   return (
@@ -64,7 +83,7 @@ const UpdateQuestion = (props) => {
           x
         </span>
         <h1>Update Question</h1>
-        <div onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <p>Question</p>
           <div class="input-group mb-3">
             <input
@@ -146,22 +165,21 @@ const UpdateQuestion = (props) => {
             aria-label="Default select example"
             onChange={onChange}
             name="jawaban"
+            required
           >
-            <option value="1" selected>
-              First Choice
+            <option selected hidden disabled>
+              The Answer
             </option>
+            <option value="1">First Choice</option>
             <option value="2">Second Choice</option>
             <option value="3">Third Choice</option>
             <option value="4">Fourth Choice</option>
           </select>
 
-          <button
-            onClick={handleSubmit}
-            className="btn btn-outline-primary mt-3"
-          >
+          <button type="submit" className="btn btn-outline-primary mt-3">
             Update Question
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

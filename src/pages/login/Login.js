@@ -9,7 +9,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "./component/login.css";
 import NavTitle from "../nav/NavTitle";
-import Loadingsvg from "../loading/Loadingsvg";
 
 export default function Login() {
   const [verifikasi, { data, loading, error }] = useLazyQuery(GET_LOGIN_USER);

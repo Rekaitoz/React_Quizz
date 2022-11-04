@@ -36,7 +36,7 @@ const EditQuiz = () => {
         jawab_4: jaw4,
         jawaban: jawabanR,
         pertanyaan: pertanyaanR,
-        quiz_id: data?.quiz[0].questions[0].quiz_id,
+        quiz_id: data?.quiz[0].id,
       },
     });
     setIsOpen(!isOpen);
@@ -46,7 +46,7 @@ const EditQuiz = () => {
     setIsOpen(!isOpen);
   };
   const check = () => {
-    if (!data?.quiz[0].questions) {
+    if (!data?.quiz[0].questions[0]) {
       return (
         <p style={{ color: "black", marginTop: "10px", fontSize: "20px" }}>
           <center> No Question ever made!</center>

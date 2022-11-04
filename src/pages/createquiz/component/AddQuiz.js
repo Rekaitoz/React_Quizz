@@ -20,7 +20,7 @@ const AddQuiz = (props) => {
           x
         </span>
         <h1>Add New Quiz</h1>
-        <div onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <p>Quiz Name</p>
           <div class="input-group mb-3">
             <input
@@ -49,13 +49,10 @@ const AddQuiz = (props) => {
             />
           </div>
 
-          <button
-            onClick={handleSubmit}
-            className="btn btn-outline-primary mt-3"
-          >
+          <button type="submit" className="btn btn-outline-primary mt-3">
             Add Quiz
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

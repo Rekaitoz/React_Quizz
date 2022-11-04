@@ -91,6 +91,7 @@ export const INSERT_QUIZ = gql`
 export const GET_QUESTION_QUIZ = gql`
   subscription MySubscription($path: String) {
     quiz(where: { path: { _eq: $path } }) {
+      id
       user_id
       questions {
         id

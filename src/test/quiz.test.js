@@ -8,6 +8,9 @@ import { MemoryRouter } from "react-router-dom";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import Guest from "../pages/guest/Guest";
+import Home from "../pages/home/Home";
+import CreateQuiz from "../pages/createquiz/CreateQuiz";
+import ListQuiz from "../pages/listquiz/ListQuiz";
 
 describe("AuthPage", () => {
   const log = console.log; // save original console.log function
@@ -150,4 +153,88 @@ describe("AuthPage", () => {
 
     expect(console.log.mock.calls[0][0]).toBe("success");
   });
+});
+
+describe("MainPage", () => {
+  const log = console.log; // save original console.log function
+  beforeEach(() => {
+    console.log = jest.fn(); // create a new mock function for each test
+  });
+  afterAll(() => {
+    console.log = log; // restore original console.log after all tests
+  });
+  //
+  test("checking Title Of the Home", () => {
+    render(
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <MemoryRouter initialEntries={["/"]}>
+            <Home />
+          </MemoryRouter>
+        </Provider>
+      </ApolloProvider>
+    );
+    expect(screen.getByText("Welcome To Quizz")).toBeInTheDocument();
+  });
+  //
+  test("checking Paragrap Of the Home", () => {
+    render(
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <MemoryRouter initialEntries={["/"]}>
+            <Home />
+          </MemoryRouter>
+        </Provider>
+      </ApolloProvider>
+    );
+    expect(
+      screen.getByText(
+        "in this application you can do quizzes made by other users and can also make quizzes so that they can be done by your friends or other users"
+      )
+    ).toBeInTheDocument();
+  });
+  //
+  test("checking Paragrap Of the Home", () => {
+    render(
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <MemoryRouter initialEntries={["/"]}>
+            <Home />
+          </MemoryRouter>
+        </Provider>
+      </ApolloProvider>
+    );
+    expect(
+      screen.getByText(
+        "in this application you can do quizzes made by other users and can also make quizzes so that they can be done by your friends or other users"
+      )
+    ).toBeInTheDocument();
+  });
+  //
+  test("checking Title Of the Listquiz", () => {
+    render(
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <MemoryRouter initialEntries={["/listquiz"]}>
+            <ListQuiz />
+          </MemoryRouter>
+        </Provider>
+      </ApolloProvider>
+    );
+    expect(screen.getByText("Choose Your Quiz")).toBeInTheDocument();
+  });
+  //
+  test("checking Title Of the CreateQuiz", () => {
+    render(
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <MemoryRouter initialEntries={["/createquiz"]}>
+            <CreateQuiz />
+          </MemoryRouter>
+        </Provider>
+      </ApolloProvider>
+    );
+    expect(screen.getByText("Create Your Own Quiz")).toBeInTheDocument();
+  });
+  //
 });
