@@ -6,6 +6,16 @@ import "./component/listquiz.css";
 
 const ListQuiz = () => {
   const { data, error, loading } = useSubscription(GET_QUIZ_PUBLIC);
+
+  const check = () => {
+    if (!data?.quiz[0]) {
+      return (
+        <p style={{ color: "black", marginTop: "10px", fontSize: "20px" }}>
+          <center> No Quiz ever made!</center>
+        </p>
+      );
+    }
+  };
   return (
     <div className="listquiz">
       <Navbar />
@@ -29,6 +39,7 @@ const ListQuiz = () => {
             />
           ))}
         </table>
+        {check()}
       </div>
     </div>
   );

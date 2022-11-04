@@ -60,6 +60,7 @@ export default function Register() {
     console.log(error);
   }
   const handleSubmit = async (e) => {
+    console.log("success");
     e.preventDefault();
     verifikasi({
       variables: {
@@ -112,7 +113,11 @@ export default function Register() {
           </div>
           <div className="tombol">
             <center>
-              <button className="btn btn-outline-primary" type="submit">
+              <button
+                className="btn btn-outline-primary"
+                type="submit"
+                data-testid="enter"
+              >
                 Make New Account
               </button>
             </center>

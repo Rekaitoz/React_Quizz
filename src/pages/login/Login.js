@@ -22,10 +22,10 @@ export default function Login() {
     async function cek() {
       if (data?.user[0]) {
         // Jika Benar, Mengambil Token yang dimiliki user dan menyimpannya di local storage
+        console.log("success");
         {
           data?.user.map((item) => dispatch(addTokenUser(item)));
         }
-        console.log("success");
         Swal.fire("Login Succes!", "Welcome To Quizz!", "success");
         navigate("/");
       } else {
@@ -51,6 +51,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("success");
     // Mencari di APIHASURA apakah username ditemukan, dan Mencek apakah password benar
     verifikasi({
       variables: {
@@ -99,7 +100,7 @@ export default function Login() {
               <button
                 type="submit"
                 className="btn btn-outline-primary"
-                data-testid="submit"
+                data-testid="enter"
               >
                 Submit
               </button>

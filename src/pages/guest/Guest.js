@@ -12,6 +12,7 @@ export default function Guest() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("success");
     // Memasukkan nama Guest ke token
     dispatch(addTokenGuest(userGuest));
     Swal.fire("Login Succes!", "Welcome To Quizz!", "success");
@@ -38,7 +39,11 @@ export default function Guest() {
           </div>
           <div className="tombol">
             <center>
-              <button type="submit" className="btn btn-outline-primary">
+              <button
+                type="submit"
+                className="btn btn-outline-primary"
+                data-testid="enter"
+              >
                 Enter
               </button>
             </center>
