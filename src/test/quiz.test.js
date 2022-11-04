@@ -2,13 +2,12 @@ import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { Provider } from "react-redux";
 import { render, screen, fireEvent } from "@testing-library/react";
-import client from "../../appolo/apollo-client";
-import { store, persistor } from "../../store/store";
+import client from "../appolo/apollo-client";
+import { store, persistor } from "../store/store";
 import { MemoryRouter } from "react-router-dom";
-import Login from "../login/Login";
-import Register from "../register/Register";
-import Guest from "../guest/Guest";
-import Home from "../home/Home";
+import Login from "../pages/login/Login";
+import Register from "../pages/register/Register";
+import Guest from "../pages/guest/Guest";
 
 describe("AuthPage", () => {
   const log = console.log; // save original console.log function

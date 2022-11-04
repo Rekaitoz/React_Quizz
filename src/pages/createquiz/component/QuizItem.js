@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { DELETE_QUIZ } from "../../../appolo/MyQuery";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,16 @@ const QuizItem = (props) => {
     // navigate("/createquiz");
   };
 
+  const newLink = () => {
+    const locations = window.location.host;
+    const link = locations + "/doquiz/" + props.path;
+    navigator.clipboard.writeText(link);
+    Swal.fire(
+      "Copy To Clipboard Succes",
+      "Link already saved at your Clipboard!",
+      "success"
+    );
+  };
   const editQuiz = () => {
     navigate("/editquiz/" + props.path);
   };
@@ -21,12 +32,15 @@ const QuizItem = (props) => {
     <tr>
       <td>{props.index + 1}</td>
       <td>{props.quiz_name}</td>
-      <td> /{props.path}</td>
+      <td>
+        <i onClick={() => newLink()} className="bi bi-clipboard2-fill"></i>/
+        {props.path}
+      </td>
       <td className="removeBorder" onClick={() => deleteQuiz(props.id)}>
-        <i class="bi bi-trash3-fill"></i>
+        <i className="bi bi-trash3-fill"></i>
       </td>
       <td className="removeBorder" onClick={() => editQuiz()}>
-        <i class="bi bi-pencil"></i>
+        <i className="bi bi-pencil"></i>
       </td>
     </tr>
   );
