@@ -224,17 +224,4 @@ describe("MainPage", () => {
     expect(screen.getByText("Choose Your Quiz")).toBeInTheDocument();
   });
   //
-  test("checking Title Of the CreateQuiz", () => {
-    render(
-      <ApolloProvider client={client}>
-        <Provider store={store}>
-          <MemoryRouter initialEntries={["/createquiz"]}>
-            <CreateQuiz />
-          </MemoryRouter>
-        </Provider>
-      </ApolloProvider>
-    );
-    expect(screen.getByText("Create Your Own Quiz")).toBeInTheDocument();
-  });
-  //
 });
